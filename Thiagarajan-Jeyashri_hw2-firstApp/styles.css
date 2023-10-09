@@ -1,0 +1,101 @@
+
+.gif{
+    height: 200px;
+    width:200px
+}
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    margin-bottom: 100px;
+}
+.smallheading{
+    font-size: 60px;
+  }
+.top-container{
+    background-image: url("/assets/mustard.jpg");
+    background-color: #f6b717;
+    padding-top: 100px;
+    font-family: "Helvetica", sans-serif;
+}
+#heading{
+    color: rgb(27, 118, 222);
+    font-family: "Helvetica", sans-serif;
+}
+.middle-container {
+    position: relative;
+   
+    background-color: #fee199;
+}
+.second-container{  
+    position: relative;
+    
+    background-color: #fee199;
+}
+.myimg {
+    border-radius: 50%; 
+    height: 300px;
+    border: 2px solid rgb(27, 118, 222);
+    
+}
+.ml-img {
+    width:200px;
+    height:200px;
+    border: 2px solid rgb(27, 118, 222);
+    
+}
+.move-right{
+    text-align: right;
+}
+
+.parent{
+    display: grid;
+    grid-template-columns: 0.5fr 1fr;
+    grid-template-rows: repeat(1, 1fr);
+    width: 50%;
+    margin: 100px auto 0 auto;
+    text-align: left;
+    row-gap: 2rem;
+}
+.bigHeading{
+    font-family: "Helvetica", sans-serif;
+    font-size: 60px;
+}
+h3{
+    color:  #ff7a15;
+    font-family: "Helvetica", sans-serif;
+}
+h2{
+    color: rgb(27, 118, 222);
+    font-family: "Helvetica", sans-serif;
+}
+
+
+
+div {
+    display: block;
+}
+
+.btn {
+    color: rgb(27, 118, 222);
+    font-family: "Helvetica", sans-serif;
+    font-size: 10px;
+    padding: 7px 7px 7px 7px;
+   
+  }
+p{
+    font-size: 15px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    border: 2px solid rgb(27, 118, 222);
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid rgb(27, 118, 222);
+    text-align: left;
+    padding: 8px;
+  }
+  
