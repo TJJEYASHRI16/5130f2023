@@ -1,7 +1,6 @@
 Nov 6th 
 We've covered the fundamental steps of building a web page using Node.js and the Express framework, and we've established the basic user interface. Using EJS, Node.js, and Express, we've incorporated a few internal links into our webpage. We've relied on HTML and CSS for styling. Our next significant milestone is to enhance functionality and establish a connection with a database, which will be a critical part of our project's progress.
 
-I take pride in acquiring knowledge about a new concept known as EJS (Embedded JavaScript). I've successfully established a structural foundation for my website, 
-incorporating a consistent navigation bar in the header and designing a footer.
-This uniform design element is maintained across all the pages, ensuring a cohesive and professional look throughout the site.
-Link to this - https://github.com/TJJEYASHRI16/5130f2023/tree/main/Thiagarajan-Jeyashri_Project/views
+Nob 13th,
+
+We have developed a comprehensive user management system that includes functionalities for creating, retrieving, and displaying user details. Additionally, We have implemented a category system, allowing users to be associated with specific categories. Now, We are planning to extend the system by introducing a new table that enables users to monitor and track their habits.

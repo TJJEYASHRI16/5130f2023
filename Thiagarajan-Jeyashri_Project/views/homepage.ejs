@@ -1,0 +1,19 @@
+<%- include("header.ejs") %>
+<div class="container mt-5">
+    <h1>Welcome to the Home Page</h1>
+    <% if (typeof firstName !== 'undefined' && typeof lastName !== 'undefined' && typeof email !== 'undefined' && typeof category !== 'undefined' && typeof age !== 'undefined') { %>
+      <p>New user details:</p>
+      
+        <p>First Name: <%= firstName %></p>
+        <p>Last Name: <%= lastName %></p>
+        <p>Email: <%= email %></p>
+        <p>Category: <%= category %></p>
+        <p>Age: <%= age %></p>
+      
+    <% } else { %>
+      <p>No user details available.</p>
+      <button type="button" class="btn btn-primary btn-lg px-4"><a href="/newuser" style="color: white; text-decoration: none;">Register</a></button>
+
+    <% } %>
+  </div>
+<%- include("footer.ejs") %>

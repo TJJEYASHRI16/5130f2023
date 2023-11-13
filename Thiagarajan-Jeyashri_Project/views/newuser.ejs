@@ -1,0 +1,39 @@
+<%- include("header.ejs") %>
+<div class="container mt-5" style="max-width: 400px;"> <!-- Adjust the max-width as needed -->
+  <h1 style="color:#3586ff; text-align: center;">Register</h1>
+  <p class="text-center">Please fill in the details below to help us get to know you better.</p>
+
+  <form action="/addUser" method="post">
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input type="text" class="form-control" id="firstName" name="firstName" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input type="text" class="form-control" id="lastName" name="lastName" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" name="email" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="category" class="form-label">Category</label>
+      <select class="form-select" id="category" name="category" required>
+        <option value="student">Student</option>
+        <option value="general">General</option>
+       
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="age" class="form-label">Age</label>
+      <input type="number" class="form-control" id="age" name="age" required>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+<%- include("footer.ejs") %>
