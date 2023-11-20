@@ -35,7 +35,7 @@ app.post("/register",async function(req,res){
         password:req.body.password
     });
     await new_user.save();
-    res.render("secrets");
+    res.render("login", { username: req.body.username, password: req.body.password} );
 });
 app.post("/login", async function (req, res) {
     try {

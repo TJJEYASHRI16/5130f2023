@@ -4,3 +4,7 @@ We've covered the fundamental steps of building a web page using Node.js and the
 Nob 13th,
 
 We have developed a comprehensive user management system that includes functionalities for creating, retrieving, and displaying user details. Additionally, We have implemented a category system, allowing users to be associated with specific categories. Now, We are planning to extend the system by introducing a new table that enables users to monitor and track their habits.
+
+Nov 20th,
+
+This week, our focus is on enhancing the user interface of the calendar and incorporating a new feature that integrates activities with the calendar page. Following that, our upcoming task involves developing an object-relational mapping for activities and implementing storage in the database.
