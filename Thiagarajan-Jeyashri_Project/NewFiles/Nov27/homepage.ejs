@@ -1,0 +1,51 @@
+<%- include("header.ejs") %>
+<div class="container mt-5">
+    <h1>Welcome to Consistify <%= firstName %></h1>
+    <div class="text-center mt-4">
+      <h2>Start New Habits in the <%= category %> category</h2>
+       <!-- Buttons for each habit -->
+       <div class="d-flex justify-content-center mt-3">
+        <button type="button" class="btn btn-primary mx-2" onclick="redirectToCalendar('pomodoro')">Pomodoro Study</button>
+        <button type="button" class="btn btn-primary mx-2" onclick="redirectToCalendar('phoneUse')">Limit Phone Use</button>
+        <!-- Add more buttons for other habits -->
+    </div>
+ <!-- View my progress section -->
+ <div class="text-center mt-5">
+  <h2>View My Progress</h2>
+
+  <!-- Buttons for each activity -->
+  <div class="d-flex justify-content-center mt-3">
+      <button type="button" class="btn btn-success mx-2" onclick="viewProgress('Activity1')">Activity 1</button>
+      <button type="button" class="btn btn-success mx-2" onclick="viewProgress('Activity2')">Activity 2</button>
+      <!-- Add more buttons for other activities -->
+  </div>
+</div>
+</div>
+      
+<%- include("footer.ejs") %>
+<script>
+    //27th nov
+  // JavaScript functions to handle button clicks and redirection
+//   function redirectToCalendar(activityName) {
+//       // Redirect to the calendar page passing the activityName as a parameter
+//       window.location.href = '/calendar?activity=' + activityName ;
+//   }
+
+function redirectToCalendar(activityName) {
+    // Replace 'userId', 'firstName', and other details with actual variable names used in your application
+    const userId = '<%= userId %>';
+    const firstName = '<%= firstName %>';
+    const lastName = '<%= lastName %>';
+    const email = '<%= email %>';
+    const category = '<%= category %>';
+    const age = '<%= age %>';
+
+    // Redirect to the calendar page passing the activityName and user details as parameters
+    window.location.href = `/calendar?activity=${activityName}&userId=${userId}&firstName=${firstName}&lastName=${lastName}&email=${email}&category=${category}&age=${age}`;
+  }
+  function viewProgress(activityName) {
+      // Handle logic to view progress for the selected activity
+      console.log('View progress for ' + activityName);
+      // You can add logic here to navigate to a progress page or update the UI
+  }
+  </script>

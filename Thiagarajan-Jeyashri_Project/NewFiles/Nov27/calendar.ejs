@@ -1,0 +1,143 @@
+<%- include("header.ejs") %>
+<div class="container mt-5">
+    <h1>Calendar - <%= activityName %></h1>
+
+    <!-- Display activity description and timeline at the top -->
+    <!-- <div class="text-center mt-4">
+        <h3>Description:</h3>
+        <p><activityDescription %></p>
+        <h3>Timeline:</h3>
+        <p>< activityTimeline %></p>
+    </div> -->
+
+    <!-- Calendar section -->
+    <div class="mt-5 d-flex justify-content-center">
+        <!-- Your calendar implementation goes here -->
+        <div class="calendar-container">
+            <div class="calendar-header">
+                <button onclick="prevYear()">Previous Year</button>
+                <button onclick="prevMonth()">Previous Month</button>
+                <span id="currentDate"></span>
+                <button onclick="nextMonth()">Next Month</button>
+                <button onclick="nextYear()">Next Year</button>
+            </div>
+            <div class="calendar-body">
+                <table class="calendar-table">
+                    <thead>
+                        <tr>
+                            <th colspan="7" class="month-name" id="monthName"></th>
+                        </tr>
+                        <tr class="day-names">
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            // JavaScript for the calendar functionality
+            let currentDate = new Date();
+
+            function generateCalendar(year, month) {
+    const calendarElement = document.getElementById('calendar');
+    calendarElement.innerHTML = '';
+
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const firstDay = new Date(year, month, 1).getDay();
+    const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const monthNameElement = document.getElementById('monthName');
+    monthNameElement.textContent = `${monthNames[month]} ${year}`;
+
+    let dayCounter = 1;
+
+    for (let week = 0; week < 6; week++) {
+        const row = document.createElement('tr');
+
+        for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+            const cell = document.createElement('td');
+            if (week === 0 && dayOfWeek < firstDay) {
+                // Empty cells before the first day
+                cell.textContent = '';
+            } else if (dayCounter <= daysInMonth) {
+                // Cells with days
+                cell.textContent = dayCounter;
+                cell.addEventListener('click', () => {
+                    cell.classList.toggle('selected');
+                });
+                dayCounter++;
+            }
+            row.appendChild(cell);
+        }
+
+        calendarElement.appendChild(row);
+    }
+}
+
+            function prevYear() {
+                currentDate.setFullYear(currentDate.getFullYear() - 1);
+                generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            }
+
+            function nextYear() {
+                currentDate.setFullYear(currentDate.getFullYear() + 1);
+                generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            }
+
+            function prevMonth() {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            }
+
+            function nextMonth() {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            }
+
+            generateCalendar(currentDate.getFullYear(), currentDate.getMonth());
+            //27th Nov
+            // Accessing details from URL parameters
+const userId = urlParams.get('userId');
+            function updateActivity(date, isCompleted) {
+                    const userId = '<%= userId %>'; // This should be replaced with your logic to get the user ID
+                    const activityId = '<%= activityId %>'; // This should be replaced with your logic to get the activity ID
+
+                    fetch('/updateActivity', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ userId, activityId, date, isCompleted }),
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                console.log(`Activity for ${date} updated successfully`);
+                            } else {
+                                console.error(`Failed to update activity for ${date}`);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error updating activity:', error);
+                        });
+                }
+
+                function handleCellClick(day) {
+                    const cell = document.getElementById(`day-${day}`);
+                    cell.classList.toggle('selected');
+                    const isCompleted = cell.classList.contains('selected');
+                    updateActivity(`${currentDate.getFullYear()}-${currentDate.getMonth() + 1}-${day}`, isCompleted);
+                }
+
+
+        </script>
+    </div>
+</div>
+
+<%- include("footer.ejs") %>
