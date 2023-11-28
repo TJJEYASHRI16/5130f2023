@@ -8,3 +8,22 @@ We have developed a comprehensive user management system that includes functiona
 Nov 20th,
 
 This week, our focus is on enhancing the user interface of the calendar and incorporating a new feature that integrates activities with the calendar page. Following that, our upcoming task involves developing an object-relational mapping for activities and implementing storage in the database.
+
+Nov 27th,
+
+This week we are facing issues in mapping the calendar and user habits to backedn table. This is not successful yet as we are still findind an optimal database and object mapping structure . this is the table sturcutre so far.
+CREATE TABLE activities (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  timeline TEXT
+);
+
+CREATE TABLE user_activity (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES useracc(id) ON DELETE CASCADE,
+  activity_id INTEGER REFERENCES activities(id) ON DELETE CASCADE,
+  date DATE,
+  is_completed BOOLEAN,
+   in_progress BOOLEAN
+);

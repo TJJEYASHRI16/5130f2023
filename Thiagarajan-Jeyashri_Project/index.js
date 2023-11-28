@@ -122,7 +122,7 @@ app.get("/homepage", (req, res) => {
 app.get("/calendar", (req, res) => {
   // Access query parameters from the URL
   
-  // console.log(req.query);
+  console.log(req.query);
   const activityName  = req.query.activity;
   // Render the homepage.ejs template and pass the user details as locals
   res.render("calendar.ejs", {activityName});
@@ -156,3 +156,23 @@ app.post("/checkUser",async (req, res) => {
       res.status(500).send("Internal Server Error");
     }
   });
+
+
+  //Nov 27th changes
+  // Endpoint to handle updating user activity
+app.post("/updateActivity", async (req, res) => {
+  const { userId, activityId, date, isCompleted } = req.body;
+
+  try {
+    const result = await db.query(
+      "INSERT INTO user_activity (user_id, activity_id, date, is_completed) VALUES ($1, $2, $3, $4) ON CONFLICT (user_id, activity_id, date) DO UPDATE SET is_completed = $4",
+      [userId, activityId, date, isCompleted]
+    );
+
+    console.log("User activity updated successfully:", result.rows);
+    res.sendStatus(200);
+  } catch (error) {
+    console.error("Error updating user activity:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});

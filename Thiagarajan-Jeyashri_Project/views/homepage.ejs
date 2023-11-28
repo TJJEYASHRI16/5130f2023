@@ -24,12 +24,25 @@
       
 <%- include("footer.ejs") %>
 <script>
+    //27th nov
   // JavaScript functions to handle button clicks and redirection
-  function redirectToCalendar(activityName) {
-      // Redirect to the calendar page passing the activityName as a parameter
-      window.location.href = '/calendar?activity=' + activityName ;
-  }
+//   function redirectToCalendar(activityName) {
+//       // Redirect to the calendar page passing the activityName as a parameter
+//       window.location.href = '/calendar?activity=' + activityName ;
+//   }
 
+function redirectToCalendar(activityName) {
+    // Replace 'userId', 'firstName', and other details with actual variable names used in your application
+    const userId = '<%= userId %>';
+    const firstName = '<%= firstName %>';
+    const lastName = '<%= lastName %>';
+    const email = '<%= email %>';
+    const category = '<%= category %>';
+    const age = '<%= age %>';
+
+    // Redirect to the calendar page passing the activityName and user details as parameters
+    window.location.href = `/calendar?activity=${activityName}&userId=${userId}&firstName=${firstName}&lastName=${lastName}&email=${email}&category=${category}&age=${age}`;
+  }
   function viewProgress(activityName) {
       // Handle logic to view progress for the selected activity
       console.log('View progress for ' + activityName);
