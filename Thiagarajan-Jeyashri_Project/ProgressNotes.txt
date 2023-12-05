@@ -27,3 +27,8 @@ CREATE TABLE user_activity (
   is_completed BOOLEAN,
    in_progress BOOLEAN
 );
+
+
+Dec 4th,
+
+there has been issues with passing the userId through out the application to keep track of the users progress . Fixed that issue this week .
