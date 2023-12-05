@@ -82,6 +82,7 @@ app.post("/addUser", async (req,res)=>{
   try {
     // Retrieve cat_id from categories table based on the selected category
     console.log("Before database query");
+    let userId =0;
     const catresult = await db.query("SELECT cat_id FROM categories WHERE name = $1", [category]);
     console.log("after database query");
     const catId = catresult.rows[0]?.cat_id; // Retrieve the first row's cat_id
@@ -94,9 +95,21 @@ app.post("/addUser", async (req,res)=>{
       "INSERT INTO useracc (first_name, last_name, email, category, age) VALUES ($1, $2, $3, $4, $5)",
       [firstName, lastName, email, catId, age]
     );
-
-    console.log("User added successfully:");
-    res.redirect(`/homepage?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&email=${encodeURIComponent(email)}&category=${encodeURIComponent(category)}&age=${encodeURIComponent(age)}`);
+      //Dec 4th
+      const getUser = await db.query("SELECT id, first_name , last_name ,email FROM useracc WHERE first_name = $1 and last_name = $2 and email=$3", 
+      [firstName, lastName, email]);
+    console.log("after database query");
+    if (getUser.rows.length > 0) {
+      userId = getUser.rows[0].id;
+      console.log("User ID:", userId);
+    
+      // Now you can use the userId as needed
+    } else {
+      console.log("User not found");
+    }
+       res.redirect(`/homepage?userId=${encodeURIComponent(userId)}&firstName=${encodeURIComponent(firstName)}
+       &lastName=${encodeURIComponent(lastName)}&email=${encodeURIComponent(email)}
+       &category=${encodeURIComponent(category)}&age=${encodeURIComponent(age)}`);
 
  // Redirect to the home page or any other page after successful submission
   } catch (error) {
@@ -113,16 +126,17 @@ app.listen(port, () => {
 
 app.get("/homepage", (req, res) => {
   // Access query parameters from the URL
-  const { firstName, lastName, email, category, age } = req.query;
+  console.log(req.query)
+  const { userId,firstName, lastName, email, category, age } = req.query;
 
   // Render the homepage.ejs template and pass the user details as locals
-  res.render("homepage.ejs", { firstName, lastName, email, category, age });
+  res.render("homepage.ejs", {userId, firstName, lastName, email, category, age });
 });
 
 app.get("/calendar", (req, res) => {
   // Access query parameters from the URL
   
-  console.log(req.query);
+  console.log(req.query+"Calendar");
   const activityName  = req.query.activity;
   // Render the homepage.ejs template and pass the user details as locals
   res.render("calendar.ejs", {activityName});
@@ -144,9 +158,9 @@ app.post("/checkUser",async (req, res) => {
       console.log(result);
       if (result.rows.length > 0) {
         const user = result.rows[0]; // Assuming the first row contains user details
-        const { category, age } = user;
+        const { id,category, age } = user;
   
-        return res.redirect(`/homepage?firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&email=${encodeURIComponent(email)}&category=${encodeURIComponent(category)}&age=${encodeURIComponent(age)}`);
+        return res.redirect(`/homepage?userId=${encodeURIComponent(id)}&firstName=${encodeURIComponent(firstName)}&lastName=${encodeURIComponent(lastName)}&email=${encodeURIComponent(email)}&category=${encodeURIComponent(category)}&age=${encodeURIComponent(age)}`);
       }
   
       // If user does not exist, handle accordingly (e.g., redirect to a different page)

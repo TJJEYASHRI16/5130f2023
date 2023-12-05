@@ -6,6 +6,35 @@ const axios = require("axios");
 const os = require('os');
 const app = express();
 
+// Import Workbox
+const { ServiceWorker } = require('workbox-sw');
+
+// Register service worker
+const sw = new ServiceWorker('sw.js', {
+  scope: '/',
+  plugins: [
+    new ServiceWorkerPlugin({
+      globDirectory: './public',
+      globPatterns: ['**/*.{html,json,js,css,png,jpg,gif}'],
+    }),
+  ],
+});
+
+const https = require('https');
+const fs = require('fs');
+
+const options = {
+  key: fs.readFileSync('path/to/private-key.pem'),
+  cert: fs.readFileSync('path/to/certificate.pem'),
+};
+
+https.createServer(options, app).listen(3000, () => {
+  console.log('Server started on https://localhost:3000');
+});
+
+app.get('/manifest.json', (req, res) => {
+  res.sendFile(__dirname + '/public/manifest.json');
+});
 
 app.use(express.static("public"));
 app.set('view engine' , 'ejs');
